@@ -1,12 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { CustomJumbotron } from "@/shop/components/CustomJumbotron";
 
 export const HomePage = () => {
   return (
-    <div>
-      <h1>Hola Mundo</h1>
-      <h1 className="font-montserrat">Hola Mundo</h1>
-      HomePage
-      <Button>Button</Button>
-    </div>
+    <>
+      <CustomJumbotron title="Todos los productos" />
+    </>
   );
 };
