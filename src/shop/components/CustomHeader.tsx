@@ -8,7 +8,10 @@ import { CustomLogo } from "@/components/custom/CustomLogo";
 import { useAuthStore } from "@/auth/store/auth.store";
 export const CustomHeader = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { user, logout } = useAuthStore();
+  // Esta usa el getter del authStore. No eliminaba el botón admin al cerrar sesión:
+  // const { authStatus, isAdmin, logout } = useAuthStore();
+  const { authStatus, user, logout } = useAuthStore();
+  const isAdmin = user?.roles.includes("admin") ?? false;
   const { gender } = useParams();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -94,7 +97,7 @@ export const CustomHeader = () => {
               <Search className="h-5 w-5" />
             </Button>
 
-            {!user ? (
+            {authStatus === "not-authenticated" ? (
               <Link to="/auth/login">
                 <Button variant="default" size="sm" className="ml-2">
                   Login
@@ -111,11 +114,13 @@ export const CustomHeader = () => {
               </Button>
             )}
 
-            <Link to="/admin">
-              <Button variant="destructive" size="sm" className="ml-2">
-                Admin
-              </Button>
-            </Link>
+            {isAdmin && (
+              <Link to="/admin">
+                <Button variant="destructive" size="sm" className="ml-2">
+                  Admin
+                </Button>
+              </Link>
+            )}
           </div>
         </div>
       </div>
