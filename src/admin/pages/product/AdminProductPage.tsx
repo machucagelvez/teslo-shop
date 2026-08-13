@@ -1,5 +1,3 @@
-// https://github.com/Klerith/bolt-product-editor
-
 import { Navigate, useParams } from "react-router";
 import { useProduct } from "@/admin/hooks/useProduct";
 import { CustomFullScreenLoading } from "@/components/custom/CustomFullScreenLoading";
